@@ -5,6 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Courses and Students</title>
 </head>
+<style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        h2 {
+            margin-top: 20px; /* Adjust the margin as needed */
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 80%; /* Adjust the width as needed */
+            margin-top: 20px; /* Optional margin from the top */
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+</style>
 <body>
     <h2>Courses and Students</h2>
     <table border="1">
