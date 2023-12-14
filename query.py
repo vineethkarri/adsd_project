@@ -4,11 +4,11 @@ connection = sqlite3.connect("student_course_db.db")
 
 cursor = connection.cursor()
 
-# Fetch data from the 'courses' table
+# Fetch required data from the 'courses' table 
 cursor.execute("SELECT CourseID, CourseName, Department, Credits FROM courses")
 course_rows = list(cursor.fetchall())
 
-# Fetch data from the 'students' table
+# Fetch required data from the 'students' table
 cursor.execute("SELECT StudentID, StudentName, CourseID FROM students")
 student_rows = list(cursor.fetchall())
 
@@ -18,7 +18,7 @@ print(course_rows)
 print("\nStudents:")
 print(student_rows)
 
-# Combine the data into a single list of dictionaries
+# Combine the data into a single list of dictionaries so that you can understand the data easily
 course_data = [{'CourseID': row[0], 'CourseName': row[1], 'Department': row[2], 'Credits': row[3]} for row in course_rows]
 student_data = [{'StudentID': row[0], 'StudentName': row[1], 'CourseID': row[2]} for row in student_rows]
 

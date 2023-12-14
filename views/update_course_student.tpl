@@ -9,15 +9,15 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            flex-direction: column; /* Add this line */
+            flex-direction: column; 
         }
 
         h2 {
-            margin-bottom: 20px; /* Add some margin between h2 and the form */
+            margin-bottom: 20px; 
         }
 
         form {
-            width: 300px; /* Adjust the width as needed */
+            width: 300px; 
             padding: 20px;
             border: 1px solid #ccc;
             border-radius: 5px;

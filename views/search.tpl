@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Courses and Students</title>
+    <title>Search Results</title>
     <style>
         body {
             display: flex;
@@ -31,20 +31,10 @@
         th {
             background-color: #f2f2f2;
         }
-
-        input[type="text"] {
-            padding: 5px;
-            margin-bottom: 10px;
-        }
     </style>
 </head>
 <body>
-    <h2>Courses and Students</h2>
-    <form action="/search" method="get">
-        <label for="department">Search by Department:</label>
-        <input type="text" id="department" name="department" placeholder="Enter department...">
-        <input type="submit" value="Search">
-    </form>
+    <h2>Search Results</h2>
     <table border="1">
         <tr>
             <th>Course ID</th>
@@ -55,7 +45,7 @@
             <th>Update</th>
             <th>Delete</th>
         </tr>
-        % for item in data:
+        % for item in search_results:
             <tr>
                 <td>{{item['CourseID']}}</td>
                 <td>{{item['StudentName']}}</td>
@@ -67,6 +57,6 @@
             </tr>
         % end
     </table>
-    <a href="/add">Add a new course and student</a>
+    <a href="/list">Back to List</a>
 </body>
 </html>

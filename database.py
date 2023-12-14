@@ -2,6 +2,18 @@ import sqlite3
 
 connection = sqlite3.connect("student_course_db.db")
 
+def search_by_department(department):
+    cursor = connection.cursor()
+    rows = cursor.execute(
+        f"SELECT courses.CourseID, students.StudentName, courses.CourseName, courses.Department, courses.Credits "
+        f"FROM courses LEFT JOIN students ON courses.CourseID = students.CourseID "
+        f"WHERE courses.Department LIKE ?",
+        (f"%{department}%",)
+    )
+    rows = list(rows)
+    rows = [{'CourseID': row[0], 'StudentName': row[1], 'CourseName': row[2], 'Department': row[3], 'Credits': row[4]} for row in rows]
+    return rows
+
 def get_courses_and_students(course_id=None):
     cursor = connection.cursor()
     if course_id is None:
@@ -15,11 +27,11 @@ def get_courses_and_students(course_id=None):
 def add_course_and_student(student_name, course_name, department, credits):
     cursor = connection.cursor()
     
-    # Add course
+    # Add course into the database 
     cursor.execute(f"INSERT INTO courses (CourseName, Department, Credits) VALUES ('{course_name}', '{department}', {credits})")
     connection.commit()
 
-    # Get the last inserted CourseID
+    # Here yo will get the last inserted CourseID
     cursor.execute("SELECT last_insert_rowid()")
     course_id = cursor.fetchone()[0]
 
@@ -34,17 +46,17 @@ def update_course_and_student(course_id, student_name, course_name, department, 
     cursor.execute(f"UPDATE courses SET CourseName='{course_name}', Department='{department}', Credits={credits} WHERE CourseID={course_id}")
     connection.commit()
 
-    # Update student (assuming one student per course for simplicity)
+    # Update student by assuming one student per course for easy understanding
     cursor.execute(f"UPDATE students SET StudentName='{student_name}' WHERE CourseID={course_id}")
     connection.commit()
 
 def delete_course_and_student(course_id):
     cursor = connection.cursor()
 
-    # Delete course
+    # Delete course from the database
     cursor.execute(f"DELETE FROM courses WHERE CourseID={course_id}")
     
-    # Also delete related student
+    # Also delete related student from the database
     cursor.execute(f"DELETE FROM students WHERE CourseID={course_id}")
     
     connection.commit()
@@ -57,13 +69,13 @@ def set_up_database():
     except:
         pass
 
-    # Create the 'courses' table
+    # Create the 'courses' table with required fields you want
     cursor.execute("CREATE TABLE courses (CourseID INTEGER PRIMARY KEY, CourseName TEXT, Department TEXT, Credits INTEGER)")
 
-    # Create the 'students' table
+    # Create the 'students' table with required with required fields you want
     cursor.execute("CREATE TABLE students (StudentID INTEGER PRIMARY KEY, StudentName TEXT, CourseID INTEGER, FOREIGN KEY (CourseID) REFERENCES courses(CourseID))")
 
-    # Insert sample data
+    # Insert sample data so that you can see these data in the webpage
     for course_data in [('Alice Smith', 'Computer Science Basics', 'Computer Science', 3),
                         ('Bob Johnson', 'Microeconomics', 'Economics', 4),
                         ('Charlie Brown', 'English Literature', 'English', 3),

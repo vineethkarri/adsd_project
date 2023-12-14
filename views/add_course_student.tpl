@@ -9,12 +9,12 @@
         }
 
         h2 {
-            margin-top: 20px; /* Adjust the margin as needed */
+            margin-top: 20px; 
         }
 
         form {
-            width: 50%; /* Adjust the width of the form */
-            margin-top: 20px; /* Optional margin from the top */
+            width: 50%; 
+            margin-top: 20px; 
         }
 
         label {
@@ -23,7 +23,7 @@
         }
 
         input, select {
-            width: calc(100% - 20px); /* Adjust the width of the input fields */
+            width: calc(100% - 20px); 
             padding: 8px;
             margin: 5px 0;
             box-sizing: border-box;
